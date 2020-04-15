@@ -71,7 +71,7 @@ function startWebRTC(isOfferer) {
 
   navigator.mediaDevices.getUserMedia({
     audio: true,
-    video: false,
+    video: true,
   }).then(stream => {
     localVideo.srcObject = stream;
     stream.getTracks().forEach(track => pc.addTrack(track, stream));

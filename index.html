@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <a href="#head"><img src="mute.png" id="fixedbutton"></a>
   <script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
@@ -21,7 +22,7 @@
       border-radius: 2px;
       padding: 0;
       box-shadow: rgb(255, 255, 255) 0px 2px 2px, rgb(255, 255, 255) 0px 4px 4px, rgb(255, 255, 255) 0px 8px 8px, rgba(156, 172, 172, 0.2) 0px 16px 16px, rgba(156, 172, 172, 0.2) 0px 32px 32px, rgba(156, 172, 172, 0.2) 0px 64px 64px;
-    //
+    
     }
     .copy {
       position: fixed;
@@ -30,6 +31,12 @@
       transform: translateX(-50%);
       font-size: 16px;
       color: #FFFFFF;
+      
+    }
+    .fixedbutton {
+    position: fixed;
+    bottom: 0px;
+    right: 0px; 
     }
   </style>
 </head>
@@ -38,6 +45,13 @@
   <video id="localVideo" autoplay muted></video>
   <video id="remoteVideo" autoplay></video>
   <script src="script.js"></script>
+
+  <script type="text/javascript"> 
+    document.getElementById("circle").onclick = function() { 
+        document.getElementById("circle").style.display = "none"; 
+    } 
+
+</script> 
   
 </body>
 </html>

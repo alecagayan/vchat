@@ -25,3 +25,14 @@ body {
     color: #FFFFFF;
     
   }
+  .localmutebutton {
+    position: absolute;
+    bottom: 8px;
+    left: 32px;
+
+  }
+  .remotemutebutton {
+    position: absolute;
+    bottom: 8px;
+    right: 32px;
+  }

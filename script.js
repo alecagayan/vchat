@@ -131,7 +131,8 @@ function muteRemote() {
     console.log(remoteVideo);
   
     if (lVideoOff) {
-      localVideo.srcObject = "";
+      //localVideo.srcObject = "";
+      console.log('lVideoOff', lVideoOff);
     } else {
       localVideo.srcObject = stream;
     }

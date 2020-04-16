@@ -8,7 +8,7 @@ const roomName = 'observable-' + roomHash;
 const configuration = { iceTransportPolicy: "all", // set to "relay" to force TURN.
 iceServers: [{ 
             urls: "stun:stun.l.google.com:19302" },
-             { urls: "turn:buttstuff.ops-netman.net",
+             { urls: "turn:buttstuff.ops-netman.net:3479",
                username:"alce", credential:"doesntknowhowtocode" }] };
 let room;
 let pc;

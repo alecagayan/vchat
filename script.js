@@ -126,6 +126,13 @@ function muteRemote() {
   remoteVideo.srcObject.getTracks()[0].enabled = remoteMuted;
 }
 
+function lVideoMute() {
+  lVideoOff = !lVideoOff;
+  console.log('disabling local video', lVideoOff);
+  remoteVideo.srcObject.getVideoTracks()[0].enabled = lVideoOff;
+}
+
+/*
   function lVideo() {
     lVideoOff = !lVideoOff;
     console.log(remoteVideo);
@@ -137,3 +144,4 @@ function muteRemote() {
       localVideo.srcObject = stream;
     }
   }
+*/

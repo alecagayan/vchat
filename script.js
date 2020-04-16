@@ -132,6 +132,12 @@ function lVideoMute() {
   localVideo.srcObject.getVideoTracks()[0].enabled = lVideoOff;
 }
 
+function rVideoMute() {
+  rVideoOff = !rVideoOff;
+  console.log('disabling remote video', rVideoOff);
+  rocalVideo.srcObject.getVideoTracks()[0].enabled = rVideoOff;
+}
+
 /*
   function lVideo() {
     lVideoOff = !lVideoOff;

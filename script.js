@@ -47,6 +47,7 @@ function sendMessage(message) {
 }
 
 function startWebRTC(isOfferer) {
+  console.log('Starting WebRTC: ', isOfferer);
   pc = new RTCPeerConnection(configuration);
 
 
@@ -106,4 +107,19 @@ function localDescCreated(desc) {
     () => sendMessage({'sdp': pc.localDescription}),
     onError
   );
+}
+
+var localMuted = false;
+var remoteMuted = false;
+
+function muteLocal() {
+  localMuted = !localMuted;
+  console.log('Muting local', localMuted);
+  localVideo.srcObject.getTracks()[0].enabled = localMuted;
+}
+
+function muteRemote() {
+  remoteMuted = !remoteMuted;
+  console.log('Muting remote', remoteMuted);
+  remoteVideo.srcObject.getTracks()[0].enabled = remoteMuted;
 }

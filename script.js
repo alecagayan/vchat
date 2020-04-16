@@ -1,21 +1,22 @@
 // Generate random room name if needed
-if (!location.hash) {
+if (location.hash === "") {
   location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
 }
 const roomHash = location.hash.substring(1);
 const drone = new ScaleDrone('cU9z7ev26H7O3P2f');
 const roomName = 'observable-' + roomHash;
-const configuration = {
-  iceServers: [{
-    urls: 'stun:stun.l.google.com:19302'
-  }]
-};
-let room;
-let pc;
+const configuration = { iceTransportPolicy: "all", // set to "relay" to force TURN.
+iceServers: [{ 
+            urls: "stun:stun.l.google.com:19302" },
+             { urls: "turn:butt.click:3479",
+               username:"alce", credential:"doesntknowhowtocode" }] };
+var room;
+var pc;
+var stream
 
 
-function onSuccess() {};
-function onError(error) {
+function onSuccess() {}; // please dont ever do this
+function onError(error) {// this is stupid
   console.error(error);
 };
 
@@ -70,10 +71,11 @@ function startWebRTC(isOfferer) {
     }
   };
 
-  navigator.mediaDevices.getUserMedia({
+  localCam = navigator.mediaDevices.getUserMedia({
     audio: true,
     video: true,
-  }).then(stream => {
+  }).then(lstream => {
+    stream = lstream
     localVideo.srcObject = stream;
     stream.getTracks().forEach(track => pc.addTrack(track, stream));
   }, onError);
@@ -86,6 +88,7 @@ function startWebRTC(isOfferer) {
     }
 
     if (message.sdp) {
+
       
       pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
         
@@ -101,7 +104,18 @@ function startWebRTC(isOfferer) {
   });
 }
 
+pc.oniceconnectionstatechange = function() {
+  if(pc.iceConnectionState == 'disconnected') {
+      console.log('Disconnected');
+      startWebRTC(true)
+  }
+}
+
 function localDescCreated(desc) {
+  
+  //desc += "a=fmtp:100 x-google-min-bitrate=500\r\n";
+  //desc += "a=fmtp:100 x-google-start-bitrate=1000\r\n";
+  //desc += "a=fmtp:100 x-google-max-bitrate=50000\r\n";
   pc.setLocalDescription(
     desc,
     () => sendMessage({'sdp': pc.localDescription}),
@@ -111,6 +125,8 @@ function localDescCreated(desc) {
 
 var localMuted = false;
 var remoteMuted = false;
+var rVideoOff = false
+var lVideoOff = false
 
 function muteLocal() {
   localMuted = !localMuted;
@@ -122,4 +138,17 @@ function muteRemote() {
   remoteMuted = !remoteMuted;
   console.log('Muting remote', remoteMuted);
   remoteVideo.srcObject.getTracks()[0].enabled = remoteMuted;
+}
+
+function lVideo() {
+  lVideoOff = !lVideoOff
+  console.log(remoteVideo)
+
+  if (lVideoOff) {
+    localVideo.srcObject = ""
+  } else {
+    localVideo.srcObject = stream   
+  }
+
+  
 }

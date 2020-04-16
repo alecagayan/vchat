@@ -125,12 +125,12 @@ function muteRemote() {
 }
 
   function lVideo() {
-    lVideoOff = !lVideoOff
-    console.log(remoteVideo)
+    lVideoOff = !lVideoOff;
+    console.log(remoteVideo);
   
     if (lVideoOff) {
-      localVideo.srcObject = ""
+      localVideo.srcObject = "";
     } else {
-      localVideo.srcObject = stream   
+      localVideo.srcObject = stream;
     }
   }

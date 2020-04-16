@@ -47,6 +47,7 @@ function sendMessage(message) {
 }
 
 function startWebRTC(isOfferer) {
+  console.log('Starting WebRTC: ', isOfferer);
   pc = new RTCPeerConnection(configuration);
 
 
@@ -106,4 +107,9 @@ function localDescCreated(desc) {
     () => sendMessage({'sdp': pc.localDescription}),
     onError
   );
+}
+
+function myFunction() {
+  console.log('Rabbit', pc);
+  
 }

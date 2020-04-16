@@ -111,6 +111,7 @@ function localDescCreated(desc) {
 
 var localMuted = false;
 var remoteMuted = false;
+var lVideoOff = false;
 
 function muteLocal() {
   localMuted = !localMuted;

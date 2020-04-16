@@ -5,11 +5,11 @@ if (!location.hash) {
 const roomHash = location.hash.substring(1);
 const drone = new ScaleDrone('cU9z7ev26H7O3P2f');
 const roomName = 'observable-' + roomHash;
-const configuration = {
-  iceServers: [{
-    urls: 'stun:stun.l.google.com:19302'
-  }]
-};
+const configuration = { iceTransportPolicy: "all", // set to "relay" to force TURN.
+iceServers: [{ 
+            urls: "stun:stun.l.google.com:19302" },
+             { urls: "turn:buttstuff.ops-netman.net",
+               username:"alce", credential:"doesntknowhowtocode" }] };
 let room;
 let pc;
 

@@ -31,12 +31,18 @@ drone.on('open', error => {
     }
   });
 
+  room.on('members', members => {
+    if (members.length >= 5) {
+      return alert('The room is full');
+    }
+
   //only starts webrtc when there are at least 2 members
   room.on('members', members => {
     console.log('MEMBERS', members);
     
-    const isOfferer = members.length === 2;
+    const isOfferer = members.length >= 2;
     startWebRTC(isOfferer);
+    
   });
 });
 
@@ -64,6 +70,7 @@ function startWebRTC(isOfferer) {
       pc.createOffer().then(localDescCreated).catch(onError);
     }
   }
+  
 
   pc.ontrack = event => {
     const stream = event.streams[0];

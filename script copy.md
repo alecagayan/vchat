@@ -70,7 +70,6 @@ function startWebRTC(isOfferer) {
       pc.createOffer().then(localDescCreated).catch(onError);
     }
   }
-  
 
   pc.ontrack = event => {
     const stream = event.streams[0];
@@ -136,7 +135,6 @@ function localDescCreated(desc) {
 var localMuted = false;
 var remoteMuted = false;
 var lVideoOff = false;
-var foobar = false;
 
 //mute local audio
 function muteLocal() {

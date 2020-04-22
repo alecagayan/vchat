@@ -67,6 +67,20 @@ function startWebRTC(isOfferer) {
 
   pc.ontrack = event => {
     const stream = event.streams[0];
+    if (!remoteVideo2.srcObject || remoteVideo2.srcObject.id !== stream.id) {
+      remoteVideo2.srcObject = stream;
+    }
+  };
+
+  pc.ontrack = event => {
+    const stream = event.streams[0];
+    if (!remoteVideo3.srcObject || remoteVideo3.srcObject.id !== stream.id) {
+      remoteVideo3.srcObject = stream;
+    }
+  };
+
+  pc.ontrack = event => {
+    const stream = event.streams[0];
     if (!remoteVideo.srcObject || remoteVideo.srcObject.id !== stream.id) {
       remoteVideo.srcObject = stream;
     }
@@ -141,6 +155,6 @@ function lVideoMute() {
 function rVideoMute() {
   rVideoOff = !rVideoOff;
   console.log('disabling remote video', rVideoOff);
-  rocalVideo.srcObject.getVideoTracks()[0].enabled = rVideoOff;
+  remoteVideo.srcObject.getVideoTracks()[0].enabled = rVideoOff;
 }
 
